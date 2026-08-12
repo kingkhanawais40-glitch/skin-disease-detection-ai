@@ -1,0 +1,44 @@
+SKIN DISEASE DETECTION - V4 EVALUATION
+========================================
+
+Model: skin_disease_efficientnetb0_v4.keras
+Test Loss: 1.2675
+Test Accuracy: 51.43%
+
+CONFUSION MATRIX
+Rows = Actual
+Columns = Predicted
+
+[[ 6  4  1  2  2  0  0]
+ [ 5  5  1  1  1  1  1]
+ [ 2  0  6  3  4  0  0]
+ [ 0  0  3  9  0  3  0]
+ [ 2  1  2  1  7  1  1]
+ [ 0  0  0  1  2 11  1]
+ [ 0  1  1  0  0  3 10]]
+
+CLASSIFICATION REPORT
+
+              precision    recall  f1-score   support
+
+       akiec     0.4000    0.4000    0.4000        15
+         bcc     0.4545    0.3333    0.3846        15
+         bkl     0.4286    0.4000    0.4138        15
+          df     0.5294    0.6000    0.5625        15
+         mel     0.4375    0.4667    0.4516        15
+          nv     0.5789    0.7333    0.6471        15
+        vasc     0.7692    0.6667    0.7143        15
+
+    accuracy                         0.5143       105
+   macro avg     0.5140    0.5143    0.5106       105
+weighted avg     0.5140    0.5143    0.5106       105
+
+
+PER-CLASS RECALL
+akiec: 6/15 (40.00%)
+bcc: 5/15 (33.33%)
+bkl: 6/15 (40.00%)
+df: 9/15 (60.00%)
+mel: 7/15 (46.67%)
+nv: 11/15 (73.33%)
+vasc: 10/15 (66.67%)

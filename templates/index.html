@@ -1,0 +1,1080 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Skin Disease Detection | AI Prototype</title>
+
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+         :root {
+            --primary: #1677ff;
+            --primary-dark: #0756c9;
+            --text: #172033;
+            --muted: #6b7280;
+            --border: #dfe7f1;
+            --bg: #f4f8fc;
+            --white: #ffffff;
+            --success: #168a5b;
+            --danger: #c0392b;
+        }
+        
+        body {
+            font-family: Arial, Helvetica, sans-serif;
+            background: radial-gradient(circle at top left, #e5f2ff 0, transparent 35%), radial-gradient(circle at bottom right, #e9f8f3 0, transparent 35%), var(--bg);
+            min-height: 100vh;
+            color: var(--text);
+        }
+        /* =========================
+           HEADER
+        ========================= */
+        
+        header {
+            width: 100%;
+            padding: 22px 7%;
+            background: rgba(255, 255, 255, 0.92);
+            border-bottom: 1px solid var(--border);
+            backdrop-filter: blur(12px);
+            position: sticky;
+            top: 0;
+            z-index: 100;
+        }
+        
+        .navbar {
+            max-width: 1200px;
+            margin: auto;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        
+        .brand {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+        }
+        
+        .brand-icon {
+            width: 42px;
+            height: 42px;
+            border-radius: 12px;
+            background: linear-gradient(135deg, #1677ff, #55a8ff);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            color: white;
+            font-size: 21px;
+            font-weight: bold;
+            box-shadow: 0 8px 20px rgba(22, 119, 255, 0.25);
+        }
+        
+        .brand-text h2 {
+            font-size: 18px;
+        }
+        
+        .brand-text span {
+            color: var(--muted);
+            font-size: 12px;
+        }
+        
+        .status {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            color: var(--success);
+            font-size: 13px;
+            font-weight: bold;
+        }
+        
+        .status-dot {
+            width: 9px;
+            height: 9px;
+            border-radius: 50%;
+            background: #20b26b;
+            box-shadow: 0 0 0 5px rgba(32, 178, 107, 0.12);
+        }
+        /* =========================
+           MAIN
+        ========================= */
+        
+        main {
+            max-width: 1100px;
+            margin: auto;
+            padding: 65px 20px;
+        }
+        
+        .hero {
+            text-align: center;
+            max-width: 750px;
+            margin: 0 auto 45px;
+        }
+        
+        .badge {
+            display: inline-block;
+            padding: 8px 15px;
+            border-radius: 30px;
+            background: #e8f3ff;
+            color: var(--primary);
+            font-size: 12px;
+            font-weight: bold;
+            margin-bottom: 18px;
+        }
+        
+        .hero h1 {
+            font-size: clamp(32px, 5vw, 55px);
+            line-height: 1.08;
+            margin-bottom: 18px;
+        }
+        
+        .hero h1 span {
+            color: var(--primary);
+        }
+        
+        .hero p {
+            color: var(--muted);
+            font-size: 16px;
+            line-height: 1.7;
+        }
+        /* =========================
+           GRID
+        ========================= */
+        
+        .dashboard {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 25px;
+        }
+        
+        .card {
+            background: rgba(255, 255, 255, 0.95);
+            border: 1px solid var(--border);
+            border-radius: 22px;
+            padding: 28px;
+            box-shadow: 0 15px 45px rgba(31, 55, 80, 0.08);
+        }
+        
+        .card-title {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 22px;
+        }
+        
+        .card-title h3 {
+            font-size: 19px;
+        }
+        
+        .card-title span {
+            color: var(--muted);
+            font-size: 12px;
+        }
+        /* =========================
+           UPLOAD
+        ========================= */
+        
+        .upload-area {
+            border: 2px dashed #a9c9ec;
+            border-radius: 18px;
+            min-height: 360px;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            padding: 25px;
+            text-align: center;
+            background: #f9fcff;
+            cursor: pointer;
+            transition: 0.25s ease;
+        }
+        
+        .upload-area:hover {
+            border-color: var(--primary);
+            background: #f3f9ff;
+            transform: translateY(-2px);
+        }
+        
+        .upload-icon {
+            width: 70px;
+            height: 70px;
+            border-radius: 20px;
+            background: #e8f3ff;
+            color: var(--primary);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            font-size: 32px;
+            margin-bottom: 20px;
+        }
+        
+        .upload-area h3 {
+            margin-bottom: 8px;
+        }
+        
+        .upload-area p {
+            color: var(--muted);
+            font-size: 13px;
+            margin-bottom: 20px;
+        }
+        
+        .choose-btn {
+            background: var(--primary);
+            color: white;
+            padding: 12px 23px;
+            border-radius: 9px;
+            font-size: 14px;
+            font-weight: bold;
+            border: none;
+            cursor: pointer;
+        }
+        
+        .choose-btn:hover {
+            background: var(--primary-dark);
+        }
+        
+        #imageInput {
+            display: none;
+        }
+        
+        #preview {
+            display: none;
+            width: 100%;
+            max-height: 330px;
+            object-fit: contain;
+            border-radius: 15px;
+        }
+        
+        .file-name {
+            margin-top: 15px;
+            color: var(--muted);
+            font-size: 12px;
+            word-break: break-word;
+        }
+        /* =========================
+           PREDICT BUTTON
+        ========================= */
+        
+        .predict-btn {
+            width: 100%;
+            margin-top: 20px;
+            padding: 15px;
+            border: none;
+            border-radius: 11px;
+            background: linear-gradient(135deg, #1677ff, #075dcc);
+            color: white;
+            font-size: 15px;
+            font-weight: bold;
+            cursor: pointer;
+            transition: 0.2s;
+        }
+        
+        .predict-btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 10px 25px rgba(22, 119, 255, 0.25);
+        }
+        
+        .predict-btn:disabled {
+            background: #9ca8b5;
+            cursor: not-allowed;
+            transform: none;
+            box-shadow: none;
+        }
+        /* =========================
+           LOADING
+        ========================= */
+        
+        #loading {
+            display: none;
+            text-align: center;
+            margin-top: 20px;
+            color: var(--primary);
+            font-size: 14px;
+        }
+        
+        .loader {
+            width: 25px;
+            height: 25px;
+            border: 3px solid #dcecff;
+            border-top-color: var(--primary);
+            border-radius: 50%;
+            animation: spin 0.8s linear infinite;
+            margin: 0 auto 10px;
+        }
+        
+        @keyframes spin {
+            to {
+                transform: rotate(360deg);
+            }
+        }
+        /* =========================
+           RESULT
+        ========================= */
+        
+        #result {
+            display: none;
+        }
+        
+        .prediction-box {
+            background: linear-gradient(135deg, #edf7ff, #f7fbff);
+            border: 1px solid #cce4ff;
+            border-radius: 17px;
+            padding: 25px;
+            text-align: center;
+            margin-bottom: 25px;
+        }
+        
+        .prediction-label {
+            font-size: 12px;
+            color: var(--muted);
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            margin-bottom: 8px;
+        }
+        
+        .predicted-class {
+            font-size: 32px;
+            color: var(--primary);
+            font-weight: bold;
+            margin-bottom: 8px;
+            text-transform: uppercase;
+        }
+        
+        .confidence {
+            color: var(--text);
+            font-size: 14px;
+        }
+        
+        .confidence strong {
+            color: var(--primary);
+        }
+        /* =========================
+           PROBABILITIES
+        ========================= */
+        
+        .probability-title {
+            font-size: 16px;
+            margin-bottom: 20px;
+        }
+        
+        .prob-row {
+            margin-bottom: 16px;
+        }
+        
+        .prob-info {
+            display: flex;
+            justify-content: space-between;
+            margin-bottom: 7px;
+            font-size: 13px;
+        }
+        
+        .prob-name {
+            font-weight: bold;
+        }
+        
+        .prob-value {
+            color: var(--muted);
+        }
+        
+        .bar {
+            width: 100%;
+            height: 9px;
+            background: #e8edf3;
+            border-radius: 20px;
+            overflow: hidden;
+        }
+        
+        .fill {
+            height: 100%;
+            width: 0;
+            background: linear-gradient(90deg, #1677ff, #55a8ff);
+            border-radius: 20px;
+            transition: width 0.7s ease;
+        }
+        /* =========================
+           ERROR
+        ========================= */
+        
+        #error {
+            display: none;
+            padding: 13px;
+            margin-top: 18px;
+            border-radius: 10px;
+            background: #fff0ef;
+            border: 1px solid #ffd1cd;
+            color: var(--danger);
+            font-size: 13px;
+        }
+        /* =========================
+           DISCLAIMER
+        ========================= */
+        
+        .disclaimer {
+            margin-top: 30px;
+            padding: 18px 20px;
+            background: #fffaf0;
+            border: 1px solid #f1dfad;
+            border-radius: 13px;
+            color: #765d20;
+            font-size: 12px;
+            line-height: 1.6;
+        }
+        
+        .disclaimer strong {
+            display: block;
+            margin-bottom: 5px;
+            color: #5f4914;
+        }
+        /* =========================
+           FOOTER
+        ========================= */
+        
+        footer {
+            text-align: center;
+            padding: 30px 20px 45px;
+            color: var(--muted);
+            font-size: 12px;
+        }
+        /* =========================
+           RESPONSIVE
+        ========================= */
+        
+        @media (max-width: 800px) {
+            header {
+                padding: 18px 5%;
+            }
+            .status {
+                display: none;
+            }
+            main {
+                padding: 45px 15px;
+            }
+            .dashboard {
+                grid-template-columns: 1fr;
+            }
+            .card {
+                padding: 20px;
+            }
+            .upload-area {
+                min-height: 300px;
+            }
+        }
+        
+        @media (max-width: 450px) {
+            .brand-text h2 {
+                font-size: 15px;
+            }
+            .hero h1 {
+                font-size: 34px;
+            }
+            .predicted-class {
+                font-size: 27px;
+            }
+        }
+    </style>
+</head>
+
+<body>
+
+    <!-- =========================
+     HEADER
+========================= -->
+
+    <header>
+
+        <div class="navbar">
+
+            <div class="brand">
+
+                <div class="brand-icon">
+                    AI
+                </div>
+
+                <div class="brand-text">
+                    <h2>Skin Disease Detection</h2>
+                    <span>EfficientNetB0 AI Prototype</span>
+                </div>
+
+            </div>
+
+            <div class="status">
+                <span class="status-dot"></span> API Connected
+            </div>
+
+        </div>
+
+    </header>
+
+
+    <!-- =========================
+     MAIN
+========================= -->
+
+    <main>
+
+        <section class="hero">
+
+            <div class="badge">
+                AI-POWERED SKIN ANALYSIS
+            </div>
+
+            <h1>
+                Skin Disease
+                <span>Detection</span>
+            </h1>
+
+            <p>
+                Upload a skin image and let the trained EfficientNetB0 model analyze the image across seven supported skin disease classes.
+            </p>
+
+        </section>
+
+
+        <section class="dashboard">
+
+            <!-- =========================
+             UPLOAD CARD
+        ========================= -->
+
+            <div class="card">
+
+                <div class="card-title">
+
+                    <h3>Upload Image</h3>
+
+                    <span>JPG / JPEG / PNG</span>
+
+                </div>
+
+
+                <label class="upload-area" for="imageInput">
+
+                <div class="upload-icon" id="uploadIcon">
+                    ↑
+                </div>
+
+                <h3 id="uploadTitle">
+                    Choose a skin image
+                </h3>
+
+                <p id="uploadText">
+                    Click here to select an image
+                    from your computer
+                </p>
+
+                <img
+                    id="preview"
+                    alt="Selected image"
+                >
+
+                <button
+                    type="button"
+                    class="choose-btn"
+                    onclick="event.preventDefault(); document.getElementById('imageInput').click();"
+                >
+                    Choose Image
+                </button>
+
+                <div
+                    class="file-name"
+                    id="fileName"
+                ></div>
+
+            </label>
+
+
+                <input type="file" id="imageInput" accept=".jpg,.jpeg,.png">
+
+
+                <button class="predict-btn" id="predictBtn" onclick="predictImage()">
+                Analyze Image
+            </button>
+
+
+                <div id="loading">
+
+                    <div class="loader"></div>
+
+                    AI is analyzing the image...
+
+                </div>
+
+
+                <div id="error"></div>
+
+            </div>
+
+
+            <!-- =========================
+             RESULT CARD
+        ========================= -->
+
+            <div class="card">
+
+                <div class="card-title">
+
+                    <h3>Analysis Result</h3>
+
+                    <span>AI Prediction</span>
+
+                </div>
+
+
+                <div id="emptyResult">
+
+                    <div style="
+                    min-height: 360px;
+                    display:flex;
+                    align-items:center;
+                    justify-content:center;
+                    text-align:center;
+                    color:#8a94a3;
+                    ">
+
+                        <div>
+
+                            <div style="
+                            font-size:48px;
+                            margin-bottom:15px;
+                            ">
+                                🔬
+                            </div>
+
+                            <h3 style="margin-bottom:8px;">
+                                No Analysis Yet
+                            </h3>
+
+                            <p style="font-size:13px;">
+                                Upload an image and click Analyze Image to see the result.
+                            </p>
+
+                        </div>
+
+                    </div>
+
+                </div>
+
+
+                <div id="result">
+
+                    <div class="prediction-box">
+
+                        <div class="prediction-label">
+                            Predicted Class
+                        </div>
+
+                        <div class="predicted-class" id="predictedClass">
+                            -
+                        </div>
+
+                        <div class="confidence" id="confidence">
+                            Confidence: -
+                        </div>
+
+                    </div>
+
+
+                    <h3 class="probability-title">
+                        Class Probabilities
+                    </h3>
+
+                    <div id="probabilities"></div>
+
+                </div>
+
+            </div>
+
+        </section>
+
+
+        <!-- =========================
+         DISCLAIMER
+    ========================= -->
+
+        <div class="disclaimer">
+
+            <strong>⚠ Important Medical Disclaimer</strong> This AI model is an academic prototype and should not be used as a medical diagnosis or as a replacement for a qualified doctor. Predictions are experimental and may be incorrect.
+
+        </div>
+
+    </main>
+
+
+    <!-- =========================
+     FOOTER
+========================= -->
+
+    <footer>
+
+        Skin Disease Detection • EfficientNetB0 • AI Academic Prototype
+
+    </footer>
+
+
+    <script>
+        const imageInput =
+            document.getElementById("imageInput");
+
+        const preview =
+            document.getElementById("preview");
+
+        const fileName =
+            document.getElementById("fileName");
+
+        const uploadIcon =
+            document.getElementById("uploadIcon");
+
+        const uploadTitle =
+            document.getElementById("uploadTitle");
+
+        const uploadText =
+            document.getElementById("uploadText");
+
+
+        /* =========================
+           IMAGE SELECTION
+        ========================= */
+
+        imageInput.addEventListener(
+            "change",
+            function() {
+
+                const file = this.files[0];
+
+                if (!file) {
+                    return;
+                }
+
+
+                const allowedTypes = [
+                    "image/jpeg",
+                    "image/jpg",
+                    "image/png"
+                ];
+
+
+                if (!allowedTypes.includes(file.type)) {
+
+                    showError(
+                        "Please select a JPG, JPEG or PNG image."
+                    );
+
+                    imageInput.value = "";
+
+                    return;
+                }
+
+
+                const reader =
+                    new FileReader();
+
+
+                reader.onload =
+                    function(event) {
+
+                        preview.src =
+                            event.target.result;
+
+                        preview.style.display =
+                            "block";
+
+                        uploadIcon.style.display =
+                            "none";
+
+                        uploadTitle.textContent =
+                            "Image Selected";
+
+                        uploadText.textContent =
+                            "Your image is ready for analysis.";
+
+                        fileName.textContent =
+                            file.name;
+
+                    };
+
+
+                reader.readAsDataURL(file);
+
+
+                hideError();
+
+                hideResult();
+
+            }
+        );
+
+
+        /* =========================
+           PREDICT
+        ========================= */
+
+        async function predictImage() {
+
+            const file =
+                imageInput.files[0];
+
+
+            if (!file) {
+
+                showError(
+                    "Please select an image first."
+                );
+
+                return;
+            }
+
+
+            const formData =
+                new FormData();
+
+
+            formData.append(
+                "image",
+                file
+            );
+
+
+            const predictBtn =
+                document.getElementById(
+                    "predictBtn"
+                );
+
+
+            predictBtn.disabled =
+                true;
+
+            predictBtn.textContent =
+                "Analyzing...";
+
+
+            document.getElementById(
+                    "loading"
+                ).style.display =
+                "block";
+
+
+            hideError();
+
+            hideResult();
+
+
+            try {
+
+                const response =
+                    await fetch(
+                        "/predict", {
+                            method: "POST",
+                            body: formData
+                        }
+                    );
+
+
+                const data =
+                    await response.json();
+
+
+                if (!response.ok ||
+                    !data.success) {
+
+                    throw new Error(
+                        data.error ||
+                        "Prediction failed."
+                    );
+
+                }
+
+
+                showResult(
+                    data.result
+                );
+
+            } catch (error) {
+
+                showError(
+                    error.message
+                );
+
+            } finally {
+
+                document.getElementById(
+                        "loading"
+                    ).style.display =
+                    "none";
+
+
+                predictBtn.disabled =
+                    false;
+
+                predictBtn.textContent =
+                    "Analyze Image";
+
+            }
+
+        }
+
+
+        /* =========================
+           SHOW RESULT
+        ========================= */
+
+        function showResult(result) {
+
+            document.getElementById(
+                    "emptyResult"
+                ).style.display =
+                "none";
+
+
+            document.getElementById(
+                    "result"
+                ).style.display =
+                "block";
+
+
+            document.getElementById(
+                    "predictedClass"
+                ).textContent =
+                result.predicted_class;
+
+
+            document.getElementById(
+                    "confidence"
+                ).innerHTML =
+                "Confidence: <strong>" +
+                result.confidence +
+                "%</strong>";
+
+
+            const container =
+                document.getElementById(
+                    "probabilities"
+                );
+
+
+            container.innerHTML = "";
+
+
+            const probabilities =
+                Object.entries(
+                    result.probabilities
+                );
+
+
+            /*
+                Sort highest probability first
+            */
+
+            probabilities.sort(
+                (a, b) => b[1] - a[1]
+            );
+
+
+            probabilities.forEach(
+                ([className, probability]) => {
+
+                    const row =
+                        document.createElement(
+                            "div"
+                        );
+
+
+                    row.className =
+                        "prob-row";
+
+
+                    row.innerHTML = `
+
+                    <div class="prob-info">
+
+                        <span class="prob-name">
+                            ${className.toUpperCase()}
+                        </span>
+
+                        <span class="prob-value">
+                            ${probability}%
+                        </span>
+
+                    </div>
+
+                    <div class="bar">
+
+                        <div
+                            class="fill"
+                            style="width: ${probability}%"
+                        ></div>
+
+                    </div>
+
+                `;
+
+
+                    container.appendChild(
+                        row
+                    );
+
+                }
+            );
+
+        }
+
+
+        /* =========================
+           HIDE RESULT
+        ========================= */
+
+        function hideResult() {
+
+            document.getElementById(
+                    "result"
+                ).style.display =
+                "none";
+
+
+            document.getElementById(
+                    "emptyResult"
+                ).style.display =
+                "block";
+
+        }
+
+
+        /* =========================
+           ERROR
+        ========================= */
+
+        function showError(message) {
+
+            const error =
+                document.getElementById(
+                    "error"
+                );
+
+
+            error.textContent =
+                message;
+
+
+            error.style.display =
+                "block";
+
+        }
+
+
+        function hideError() {
+
+            document.getElementById(
+                    "error"
+                ).style.display =
+                "none";
+
+        }
+    </script>
+
+</body>
+
+</html>
