@@ -22,3 +22,18 @@ dataset/
 
 .DS_Store
 Thumbs.db
+
+# Old training and evaluation files
+accuracy_graph.png
+detailed_evaluation.py
+evaluate_model.py
+evaluate_v4.py
+finetuned_accuracy_graph.png
+predict.py
+prepare_dataset.py
+skin_disease_efficientnetb0_v2.keras
+train_model_v2.py
+v2_accuracy_graph.png
+v2_loss_graph.png
+v4_evaluation_report.txt
+wrong_predictions.txt
